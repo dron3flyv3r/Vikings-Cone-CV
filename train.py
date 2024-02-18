@@ -25,7 +25,7 @@ def main():
         "imgsz": 640, # Dont change this value unless you change the model
         "batch": 32, # Good idea to lower the batch size if you run out of memory
         "epochs": 100, # Number of epochs to train the model, 100 is a good starting point
-        "data": "fsoco-1/data.yaml", 
+        "data": "merged-data/data.yaml", 
         "device": "0", # Change this to 0 if you have a GPU or "cpu" if you dont have a GPU
         "dropout": 0.1, # Dropout rate - 0.1 is a good starting point for YOLO
         "save_period": 10, # Save model every 10 epochs

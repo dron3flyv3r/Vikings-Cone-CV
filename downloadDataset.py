@@ -8,3 +8,8 @@ from roboflow import Roboflow
 rf = Roboflow(api_key=os.getenv("ROBOFLOW_API_KEY"))
 project = rf.workspace("automated-historical-document-processing-fei-stu-in-bratislava").project("fsoco-94q5z")
 dataset = project.version(1).download("yolov8")
+
+from roboflow import Roboflow
+rf = Roboflow(api_key="4Qis5KnecHoCOd1GgzqE")
+project = rf.workspace("sma").project("cones-hp5il")
+dataset = project.version(4).download("yolov8")
