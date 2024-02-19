@@ -10,7 +10,7 @@ from ultralytics import YOLO
 
 def main():
     # Initialize model
-    model = YOLO("yolov8n.pt")
+    model = YOLO("yolov8s.pt")
     
     ########################################################################################
     # yolov8n: 640 Img Size 3.2M Params     8.7B FLOPs    (Fastest, lowest accuracy)       #
@@ -24,8 +24,8 @@ def main():
     parameters = {
         "imgsz": 640, # Dont change this value unless you change the model
         "batch": 32, # Good idea to lower the batch size if you run out of memory
-        "epochs": 500, # Number of epochs to train the model, 100 is a good starting point
-        "time": 5, # Number of hours to train the model, 5 is a good starting point
+        "epochs": 100, # Number of epochs to train the model, 100 is a good starting point
+        "time": 0, # Number of hours to train the model, 5 is a good starting point
         "data": "merged-data/data.yaml", # Path to the data.yaml file
         "device": "0", # Change this to 0 if you have a GPU or "cpu" if you dont have a GPU
         "dropout": 0.1, # Dropout rate - 0.1 is a good starting point for YOLO

@@ -5,8 +5,8 @@ from TypeYOLO import TypeYOLO
 def main():
     
     # Create a model
-    modelA = TypeYOLO("runs/detect/train/weights/best.pt")
-    modelB = TypeYOLO("runs/detect/train2/weights/best.pt")
+    modelA = TypeYOLO("runs/detect/train2/weights/best.pt")
+    modelB = TypeYOLO("runs/detect/train3/weights/best.pt")
     
     # Putting images into a list
     test_images_path = "test"
