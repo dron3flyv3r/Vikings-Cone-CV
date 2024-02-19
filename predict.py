@@ -2,7 +2,7 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
 import os
-from yolomodel import TypeYOLO
+from TypeYOLO import TypeYOLO
 
 
 yolo = TypeYOLO("runs/detect/train/weights/best.pt")
