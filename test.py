@@ -65,8 +65,8 @@ img = cv2.imread("test/4meter1.jpg")
 
 from TypeYOLO import TypeYOLO
 # model1 = TypeYOLO("runs/detect/train3/weights/best.pt")
-# model1.model.export(format="onnx", half=True, int8=True, simplify=True)
-model = TypeYOLO("runs/detect/train3/weights/best.onnx")
+# model1.model.export(format="OpenVINO", half=True, simplify=True)
+model = TypeYOLO("runs/detect/train3/weights/best_openvino_model")
 
 # import timeit
 
@@ -93,23 +93,25 @@ model = TypeYOLO("runs/detect/train3/weights/best.onnx")
 
 
 output = model.predict(img)
-output = model.predict(img, half=True)
-output = model.predict(img, half=True)
-output = model.predict(img, half=True)
-output = model.predict(img, half=True)
+print("Teting full model")
+output = model.predict(img)
+output = model.predict(img)
+output = model.predict(img)
+output = model.predict(img)
+print("Teting half model")
 output = model.predict(img, half=True)
 output = model.predict(img, half=True)
 output = model.predict(img, half=True)
 output = model.predict(img, half=True)
 
-print("Loading pt model...")
-model = TypeYOLO("runs/detect/train3/weights/best.pt")
-output = model.predict(img)
-output = model.predict(img)
-output = model.predict(img)
-output = model.predict(img)
-output = model.predict(img)
-output = model.predict(img)
+# print("Loading pt model...")
+# model = TypeYOLO("runs/detect/train3/weights/best.pt")
+# output = model.predict(img)
+# output = model.predict(img)
+# output = model.predict(img)
+# output = model.predict(img)
+# output = model.predict(img)
+# output = model.predict(img)
 
 # print(len(output))
 # for o in output:
