@@ -1,4 +1,6 @@
+import json
 import threading
+from time import time
 from typing import Generator
 import cv2
 import numpy as np
@@ -48,8 +50,12 @@ class TypeYOLO:
                 "save_period": save_period,
             }
             self.model.train(**parameters)
+            
+    def _process_results(self, results: Results) -> dict:
+        data = results.tojson()
+        return json.loads(data) 
         
-    def predict(self, *images: list[str] | str, show: bool = False, min_conf: float = 0.5) -> list[Results]:
+    def predict(self, *images: list[str] | str, show: bool = False, min_conf: float = 0.5, device: str = "cpu", half: bool = False) -> list[dict]:
         """
         Predicts the results for the given images.
 
@@ -66,23 +72,23 @@ class TypeYOLO:
         """
         # if isinstance(images, str):
         #     images = [images]
+        start_time = time()
         results: list[Results] = []
         for img in images:
-            out = self.model.predict(img, conf=min_conf)
-            results.extend(out)
+            out = self.model.predict(img, conf=min_conf, device=device, half=half)[0]
+            results.append(out)
+            print(f"Time check: {time() - start_time:.2f} seconds")
+            
+        print(f"Total time taken: {time() - start_time:.2f} seconds")
         
         
-        if isinstance(results, Results):
-            results = [results]
-        elif isinstance(results, list):
-            results = results
-        else:
+        if not isinstance(results, list):
             raise TypeError("Sorry, but the model is unable to return a 'Results' object.")
         
         if show:
             self.show(results)
         
-        return results
+        return [self._process_results(result) for result in results][0]
     
     def stream(self, source: str | list[str], *, show: bool = False, block: bool = False) -> Generator[Results, None, None]:
             """
@@ -233,5 +239,5 @@ class TypeYOLO:
             result.save(filename=f"{path}/result_{i}.jpg")
             
     def __call__(self, *images: list[str] | str, show: bool = False) -> list[Results]:
-        return self.predict(*images, show=show)
+        return self.predict(*images, show=show)       
         
