@@ -57,7 +57,7 @@ class YOLODetector:
                 results.append(result)
 
         return results
-    
+
 # model = YOLODetector("runs/detect/train3/weights/best.onnx")
 img = cv2.imread("test/4meter1.jpg")
 # model = YOLO("runs/detect/train3/weights/best.onnx")
@@ -66,7 +66,7 @@ img = cv2.imread("test/4meter1.jpg")
 from TypeYOLO import TypeYOLO
 # model1 = TypeYOLO("runs/detect/train3/weights/best.pt")
 # model1.model.export(format="OpenVINO", half=True, simplify=True)
-model = TypeYOLO("runs/detect/train3/weights/best_openvino_model")
+model = TypeYOLO("runs/detect/train3/weights/best.onnx")
 
 # import timeit
 
@@ -92,6 +92,8 @@ model = TypeYOLO("runs/detect/train3/weights/best_openvino_model")
 # print(f"ONNX: {onnx_time/1000} PT: {pt_time/1000}")
 
 
+model.predict(1)
+exit()
 output = model.predict(img)
 print("Teting full model")
 output = model.predict(img)
@@ -116,19 +118,6 @@ output = model.predict(img, half=True)
 # print(len(output))
 # for o in output:
 #     print(o)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # import cv2
