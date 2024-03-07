@@ -1,0 +1,17 @@
+description: Ultralytics best model trained on merged-data/data.yaml
+author: Ultralytics
+license: AGPL-3.0 https://ultralytics.com/license
+date: '2024-03-07T23:43:21.626278'
+version: 8.1.14
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: blue_cone
+  1: large_orange_cone
+  2: orange_cone
+  3: unknown_cone
+  4: yellow_cone

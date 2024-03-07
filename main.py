@@ -5,8 +5,11 @@ from TypeYOLO import TypeYOLO
 
 def main():
 
-    model = TypeYOLO("runs/detect/train3/weights/best.pt")
-    model.model.predict(0, stream=True, visualize=True)
+    model = TypeYOLO("runs/detect/train2/weights/best.pt")
+    model.model.export(format="OpenVINO", half=True, simplify=True, device=0)
+    # and onnx
+    model.model.export(format="ONNX", half=True, simplify=True, device=0)
+    # model.model.predict(0, stream=True, visualize=True)
     # model.stream(1, show=True)
 
     return
