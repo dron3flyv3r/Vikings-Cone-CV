@@ -9,19 +9,19 @@ def main():
     # yolo.model.export(format="ncnn", half=True, imgsz=640)
     
     results = yolo.detect("test/4meter1.jpg")
-    # print(results)
-    results = yolo.detect("test/4meter1.jpg")
-    results.save("output/4meter1_v10.jpg")
+    print(results)
+    # results = yolo.detect("test/4meter1.jpg")
+    # results.save("output/4meter1_v10.jpg")
     
-    results = yolo.detect("test/10meter3.jpg")
-    results.save("output/10meter3_v10.jpg")
+    # results = yolo.detect("test/10meter3.jpg")
+    # results.save("output/10meter3_v10.jpg")
     
-    yolo.manual_setup("runs/detect/train3/weights/best.onnx", False)
-    results = yolo.detect("test/4meter1.jpg")
-    results.save("output/4meter1_v8.jpg")
+    # yolo.manual_setup("runs/detect/train3/weights/best.onnx", False)
+    # results = yolo.detect("test/4meter1.jpg")
+    # results.save("output/4meter1_v8.jpg")
     
-    results = yolo.detect("test/10meter3.jpg")
-    results.save("output/10meter3_v8.jpg")
+    # results = yolo.detect("test/10meter3.jpg")
+    # results.save("output/10meter3_v8.jpg")
         
     
     # print(results)

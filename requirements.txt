@@ -1,0 +1,6 @@
+numpy==2.0.0
+onnxruntime==1.18.0
+onnxruntime_gpu==1.18.0
+opencv_python==4.10.0.82
+ultralytics==8.1.34
+torch==2.1.0

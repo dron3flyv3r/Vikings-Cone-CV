@@ -2,25 +2,32 @@ from time import time
 from ultralytics import YOLOv10, YOLO
 from ultralytics.engine.results import Results
 from typing import Literal
-import os
 
 class ConePosition:
-    def __init__(self, x1: float, y1: float, x2: float, y2: float, type: Literal["yellow", "blue", "orange", "unknown"], results: Results | None = None):
+    def __init__(self, x1: float, y1: float, x2: float, y2: float, objectType: Literal["yellow", "blue", "orange", "unknown"], results: Results, conf: float):
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
-        self.type = type
+        self.type: Literal["yellow", "blue", "orange", "unknown"] = objectType
         self.results = results
+        self.conf = conf
         
     def plot(self):
-        self.results.plot(show=True) if self.results is not None else print("No results to plot")
+        self.results.plot(show=True)
         
     def save(self, path: str):
-        self.results.plot(save=True, filename=path) if self.results is not None else print("No results to save")
+        self.results.plot(save=True, filename=path)
         
     def __str__(self):
-        return f"{self.type} cone at ({self.x1}, {self.y1}) to ({self.x2}, {self.y2})"
+        text = "<Cone: "
+        for key, value in self.__dict__.items():
+            if key == "results":
+                continue
+            text += f"{key}={value},  "
+        text = text[:-3]
+        text += ">"
+        return text
     
     def __repr__(self):
         return str(self)
@@ -44,7 +51,12 @@ class Cones:
             self.cones[0].save(path)
     
     def __str__(self):
-        return f"<Cones: {self.num_cones} cones detected in {self.time} seconds at {self.fps} FPS>"
+        text = "<Cones: "
+        for key, value in self.__dict__.items():
+            text += f"{key}={value}, "
+        text = text[:-2]
+        text += ">"
+        return text
     
     def __repr__(self):
         return str(self)
@@ -117,10 +129,7 @@ class BetterYoloV10:
                 y1 /= height
                 y2 /= height
                 
-                cones.append(ConePosition(x1, y1, x2, y2, idxToCone[int(b.cls.item())], result))
-                
-        # print(f"Detection took {(time() - start_time)*1000}ms")
-        # print(f"FPS: {1 / (time() - start_time)}")
+                cones.append(ConePosition(x1, y1, x2, y2, idxToCone[int(b.cls.item())], result, b.conf.item()))
         
         return Cones(cones, width, height, time() - start_time)
     
@@ -129,15 +138,11 @@ class BetterYoloV10:
         if self.model is None:
             self.model = self._setup_model()
         
-        
-        
         # Export the model and set the correct path
         self.model.export(format="onnx", simplify=True)
-                
         
-        
-        
-        
+        # TODO: Need to make for a raspberry pi and windows
+    
         
         # # check if os is windows
         # if os.name == "nt":
