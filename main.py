@@ -7,9 +7,9 @@ def main():
     yolo = BetterYoloV10("runs/detect/train5/weights/best.onnx")
     # yolo.compile()
     # yolo.model.export(format="ncnn", half=True, imgsz=640)
-    
-    results = yolo.detect("test/4meter1.jpg")
-    print(results)
+    yolo.test_detect("GOPR0091.MP4")
+    # results = yolo.detect("test/4meter1.jpg")
+    # print(results)
     # results = yolo.detect("test/4meter1.jpg")
     # results.save("output/4meter1_v10.jpg")
     
